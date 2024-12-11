@@ -1,0 +1,167 @@
+Widget _buildHeader() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Row(
+          children: [
+            const CircleAvatar(
+              radius: 20,
+              backgroundImage: AssetImage('assets/profile.jpg'),
+            ),
+            const SizedBox(width: 12),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: const [
+                Text(
+                  'Athul Anil',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  'Floor Manager',
+                  style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 14,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+        Row(
+          children: [
+            Switch(
+              value: false,
+              onChanged: null,
+            ),
+            IconButton(
+              icon: const Icon(Icons.notifications_outlined),
+              onPressed: () {},
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+
+
+  -------------------
+
+  Widget _buildAttendanceSection() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          "Today's Attendance",
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        ),
+        const SizedBox(height: 16),
+        Row(
+          children: const [
+            Expanded(
+              child: AttendanceCard(
+                title: 'Check In',
+                time: '05:00 am',
+                subtitle: 'In Time',
+                icon: Icons.login,
+              ),
+            ),
+            SizedBox(width: 16),
+            Expanded(
+              child: AttendanceCard(
+                title: 'Check Out',
+                time: '05:00 pm',
+                subtitle: 'GoTime',
+                icon: Icons.logout,
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 16),
+        Row(
+          children: const [
+            Expanded(
+              child: AttendanceCard(
+                title: 'Break Time',
+                time: '00:45 min',
+                subtitle: 'Avg Time',
+                icon: Icons.timer,
+              ),
+            ),
+            SizedBox(width: 16),
+            Expanded(
+              child: AttendanceCard(
+                title: 'Total Days',
+                time: '28',
+                subtitle: 'Working Days',
+                icon: Icons.calendar_today,
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  -------------------------------
+
+  class AttendanceCard extends StatelessWidget {
+  final String title;
+  final String time;
+  final String subtitle;
+  final IconData icon;
+
+  const AttendanceCard({
+    Key? key,
+    required this.title,
+    required this.time,
+    required this.subtitle,
+    required this.icon,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.grey.shade200),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(icon, color: Colors.blue),
+              const SizedBox(width: 8),
+              Text(
+                title,
+                style: const TextStyle(
+                  color: Colors.grey,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          Text(
+            time,
+            style: const TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Text(
+            subtitle,
+            style: TextStyle(
+              color: Colors.grey.shade600,
+              fontSize: 12,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
